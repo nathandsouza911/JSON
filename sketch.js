@@ -6,7 +6,7 @@ const Constraint = Matter.Constraint;
 var engine, world;
 var backgroundImg;
 
-var bg ;
+var bg = "sunrise1.png";
 
 function preload() {
     // create getBackgroundImg( ) here
@@ -23,7 +23,8 @@ function setup(){
 function draw(){
 
     // add condition to check if any background image is there to add
-
+    if(backgroundImg)
+        background(backgroundImg);
 
     Engine.update(engine);
 
@@ -34,12 +35,10 @@ function draw(){
 
 async function getBackgroundImg(){
 
-    // write code to fetch time from API
     var response = await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
-    //change the data in JSON format
     var responseJSON = await response.json();
+
     var datetime = responseJSON.datetime;
-    // write code slice the datetime
     var hour = datetime.slice(11,13);
 
     // add conditions to change the background images from sunrise to sunset
@@ -71,4 +70,5 @@ async function getBackgroundImg(){
 
     //load the image in backgroundImg variable here
     backgroundImg=loadImage(bg);
+    
 }
